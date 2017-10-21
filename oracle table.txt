@@ -1,0 +1,34 @@
+create table Application( Application_id number(10) primary key,full_name varchar2(20), date_of_birth date, highest_qualification
+varchar2(10), marks_obtained number(10), goals varchar2(200),
+email_id varchar2(50), Scheduled_program_id varchar2(10) references Programs_Scheduled(Scheduled_program_id),
+status varchar2(20),Date_Of_Interview date); 
+
+create table Programs_Scheduled( Scheduled_program_id varchar2(10) primary key,
+ProgramName varchar2(50) references Programs_Offered(ProgramName) , Location varchar2(20), start_date
+date, end_date date, sessions_per_week number(20)); 
+
+create table Programs_Offered(ProgramName varchar2(50) primary key, description
+varchar2(200), applicant_eligibility varchar2(40) ,
+duration number(30), degree_certificate_offered varchar2(10)); 
+
+create table Participant(Roll_no varchar2(10), email_id varchar2(50),
+Application_id number(10) references Application(Application_id) , Scheduled_program_id varchar2(10) references Programs_Scheduled(Scheduled_program_id)); 
+
+insert into Users values('zmatani','bhatia','MAC');
+insert into Users values('smore','shar','MAC');
+insert into Users values('ashinde','aish','MAC');
+insert into Users values('ashu','ashuji','MAC');
+insert into Users values('redin','rpodi','MAC');
+insert into Users values('vipul','vsam','Admin');
+
+
+INSERT INTO Programs_Offered VALUES('EXTC','Electronics','HSC',4,'B.E.(EXTC)');
+INSERT INTO Programs_Offered VALUES('IT','IT','HSC',4,'B.E.(IT)');
+
+UPDATE Application SET status="confirmed"where Application_id=1007;
+
+
+INSERT INTO Programs_Scheduled VALUES('E100','EXTC','Mumbai','30-Jun-2000','30-Jun-2004',4);
+INSERT INTO Programs_Scheduled VALUES('I100','IT','Pune','30-Jun-2000','30-Jun-2004',4); 
+
+create table Users(login_id varchar2(10), password varchar2(10),role varchar2(10));
